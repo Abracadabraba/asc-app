@@ -90,12 +90,24 @@ class LockOverlayActivity : AppCompatActivity() {
     }
 
     private fun goHome() {
+        killRestrictedAppProcess()
         val homeIntent = Intent(Intent.ACTION_MAIN).apply {
             addCategory(Intent.CATEGORY_HOME)
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         }
         startActivity(homeIntent)
         finish()
+    }
+
+    private fun killRestrictedAppProcess() {
+        if (pkg.isBlank()) return
+        try {
+            val am = getSystemService(ACTIVITY_SERVICE) as android.app.ActivityManager
+            am.killBackgroundProcesses(pkg)
+        } catch (e: Exception) {
+            // Some OEMs restrict this; safe to ignore, the app is already
+            // off-screen at this point so this is just extra cleanup.
+        }
     }
 
     // Prevent leaving the lock screen via back button; user must go Home
