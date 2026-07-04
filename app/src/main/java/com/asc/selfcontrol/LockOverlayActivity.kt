@@ -1,5 +1,6 @@
 package com.asc.selfcontrol
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -30,6 +31,7 @@ class LockOverlayActivity : AppCompatActivity() {
         val tvError = findViewById<TextView>(R.id.tvError)
         val btnUnlock = findViewById<Button>(R.id.btnUnlock)
         val tvForgot = findViewById<TextView>(R.id.tvForgot)
+        val tvCancel = findViewById<TextView>(R.id.tvCancel)
 
         tvAppLabel.text = "$label 当前处于限制时段"
 
@@ -81,6 +83,19 @@ class LockOverlayActivity : AppCompatActivity() {
                 Toast.LENGTH_LONG
             ).show()
         }
+
+        tvCancel.setOnClickListener {
+            goHome()
+        }
+    }
+
+    private fun goHome() {
+        val homeIntent = Intent(Intent.ACTION_MAIN).apply {
+            addCategory(Intent.CATEGORY_HOME)
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
+        startActivity(homeIntent)
+        finish()
     }
 
     // Prevent leaving the lock screen via back button; user must go Home
@@ -88,6 +103,6 @@ class LockOverlayActivity : AppCompatActivity() {
     // since a normal Activity cannot fully disable the system Home button
     // without device-owner/kiosk mode privileges.
     override fun onBackPressed() {
-        moveTaskToBack(true)
+        goHome()
     }
 }
