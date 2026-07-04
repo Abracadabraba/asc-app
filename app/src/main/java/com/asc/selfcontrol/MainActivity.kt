@@ -247,7 +247,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun openBatteryOptimizationSettings() {
         try {
-            startActivity(Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATIONS_SETTINGS))
+            startActivity(Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS))
             Toast.makeText(
                 this,
                 "找到 ASC，把耗电策略设置为「无限制」",
