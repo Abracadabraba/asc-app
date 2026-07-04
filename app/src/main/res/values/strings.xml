@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ASC 辅助性自律</string>
+    <string name="accessibility_service_description">ASC 需要此权限来检测你设置了时间限制的应用何时被打开，从而在限定时间内进行拦截。ASC 不会读取屏幕内容。</string>
+</resources>
